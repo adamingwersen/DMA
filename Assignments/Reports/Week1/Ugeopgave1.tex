@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+
+\begin{document}
+\author{Adam Ingwersen, Peter Friborg, Aske Fjellerup}
+\title{Ugeopgave 1 \\ DMA E16 \\ DIKU}
+\maketitle
+
+
+\section*{Del 1}
+Betragt pseudokoden anført i ugeopgave for funktionen 'exists'. Definér A som værende et array, således at $A = [1, 5, 6, 10, 15, 16, 17, 23] $
+
+\subsection*{(a) Hvad returnerer $exists(A, 8, 17)$:}
+
+True
+
+\subsection*{(b) Hvad returnerer $exists(A, 8, 14)$:}
+
+False
+
+\subsection*{(c) Hvad returnerer $exists(A, 4, 16)$:}
+
+False
+
+\subsection*{(d) Hvilke værdier antager mid, når man kalder $exists(A, 8, 3)$:}
+
+Mid antager værdierne ${3, 1, 0}$ for $exists(A, 8, 3)$
+
+
+\section*{Del 2}
+
+Funktionen $exists$ evaluerer, hvorvidt et tal, $x$, eksisterer i et array (A), indtil det $n$'te element i array A. 
+
+Når A indeholder 8 elementer, evaluerer $exists(A, 8, 17)$ samtlige elementer i A, mens $exists(A, 4, 16)$ evaluerer de 4 første elementer i A, indtil A[3]. 
+
+\clearpage
+
+\section*{Del 3}
+Antag, at $A[0],...,A[n-1]$ ikke er sorterede. 
+
+\subsection*{(a) Kan $exists(A, n, x)$ returnere 'True', hvis $x {\not\in} A$}
+Nej. Algoritmen vil per konstruktion ikke returnere 'True' for et tal, der ikke findes i array'et.
+
+\subsection*{(b) Kan $exists(A, n, x)$ returnere 'False', hvis $x {\in} A$}
+Ja. Præmisset for, at algoritmen fungerer efter hensigten er, at listen består af sorterede tal. 
+
+I et konstrueret scenarie, hvor det ønskes at finde tallet 2 i det usorterede array A, hvor A indeholder (3, 4, 6, 20, 1, 2) således at:
+\[A[0]=3, A[1) = 4, A[2] = 6, A[3] = 20, A[4] = 1, A[5] = 2\]
+
+Her vil det gælde, at $exists(A, 5, 2)$ returnerer 'False', selvom $2 {\in} A$. Dette fordi, algoritmen starter i $A[mid]$ og bevæger sig mod højre såfremt x er højere end værdien i $A[mid]$ og venstre vice versa. 
+
+\section*{Del 4}
+Når $n=17$, hvor mange gange kan while-loopet højest køres igennem via et kald til $exists(A, n, x)$ 4 gange. Resultatet er ikke betinget af, at array A er sorteret. 
+
+Intuitionen bag resultatet er; at for hver iteration af while-loopet, bliver antallet af mulige udfald ca. halveret. 
+
+Antallet af iterationer, k, for while-loopet kan approximeres som funktion af n ved:
+$$
+k = \lfloor{lg(n)} \rfloor
+$$
+\end{document}
+
+
+
+
