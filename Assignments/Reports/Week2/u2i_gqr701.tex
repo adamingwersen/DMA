@@ -1,0 +1,133 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage[danish,english]{babel}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{FRONTred.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 2i} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Adam Frederik Ingwersen Linnemann,& \\ GQR701\\ Hold 4\\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{2i}
+	\author{Adam}
+	
+	\newpage
+
+\newpage
+
+
+\subsection*{Del 1}
+Antallet af inversioner kan bestemmes ved at tælle det samlede antal 'ikke-sorterede' placeringer af elementerne i A. For arrray bestående af følgende $n = 6$ elementer; [2,1,8,4,3,6] er der sammenlagt \underline{5} inversioner. 
+\linebreak
+
+\subsection*{Del 2}
+En generel formel for at finde det maksimale antal inversioner, k, i et array bestående af n vilkårlige elementer kan bestemmes ved:
+$$
+k = \frac{n(n-1)}{2}
+$$
+
+Dette kan bl.a. skrives på følgende måde ved iterativ pseudokode:
+
+\begin{algorithm}
+\caption{Maksimale antal inversioner givet n}
+\begin{algorithmic}[1]
+\Function {MaxInv}{$n$}
+\State \parbox[t]{.7\linewidth}{v = 0}
+\State \parbox[t]{.7\linewidth}{for i = 1 to n}
+\Indent
+\State \parbox[t]{.7\linewidth}{$v = (i-1) + v$}
+\EndIndent
+\State \Return {v}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Del 3}
+
+Denne delopgave kan løses på adskillige måder - både rekursivt og iterativt. Her er valgt en iterativ tilgang, der bygger på lineær søgning. Algoritmen opererer på følgende måde:
+
+\begin{enumerate}
+\item{Positionér starten af den første løkke (i=0) ved A's 0'te element}
+\item{Positionér herefter starten af den anden løkke foran i (j=i+1)}
+\item{Lad j iterere fra j=1 til n over nedenstående betingelse:}
+\begin{enumerate}
+\item{Hvis værdien af det i'te element er strengt større end det j'te, da:}
+\item{Denotér variablen 'inv' med sin hidtige værdi plus 1}
+\end{enumerate}
+\item{Afslut ved at returnere den akkumulerede værdi for 'inv'}
+\end{enumerate}
+
+\pagebreak
+
+Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor. 
+
+\begin{algorithm}
+\caption{Tæl antal inversioner i A}
+\begin{algorithmic}[2]
+\Function {CountInv}{$A, n$}
+\State \parbox[t]{.7\linewidth}{inv = 0}
+\State \parbox[t]{.7\linewidth}{for i = 0 to n - 1}
+\Indent
+\State \parbox[t]{.7\linewidth}{for j = i+1 to n}
+\Indent
+\State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}
+\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}
+\EndIndent
+\EndIndent
+\State \Return {inv}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+En alternativ løsning til den 'fladpandede' lineære søgning ville være, at anvende merge-sort med et if-statement og en tælle-variabel i den afsluttende 'merge'-del.
+
+\subsection*{Del 4}
+
+
+
+\end{document}
