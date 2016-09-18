@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.18)  18 SEP 2016 21:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.18)  18 SEP 2016 21:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -681,14 +681,14 @@ Package gensymb Info: Using \Omega for \ohm on input line 25.
 
 Package gensymb Warning: Not defining \micro.
 
-<FRONTred.pdf, id=1, 597.23125pt x 845.1575pt>
-File: FRONTred.pdf Graphic file (type pdf)
- <use FRONTred.pdf>
-Package pdftex.def Info: FRONTred.pdf used on input line 54.
+<nat-farve.pdf, id=1, 597.23125pt x 845.1575pt>
+File: nat-farve.pdf Graphic file (type pdf)
+ <use nat-farve.pdf>
+Package pdftex.def Info: nat-farve.pdf used on input line 54.
 (pdftex.def)             Requested size: 597.54874pt x 845.06516pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./FRONTred.pdf>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./nat-farve.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 65--67
 \T1/cmr/m/n/10 el-e-menter; [2,1,8,4,3,6] er der sam-men-lagt $[]$ in-ver-sione
 r.
@@ -702,8 +702,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--67
 [1] [2] (./u2i_gqr701.aux) ) 
 Here is how much of TeX's memory you used:
  4992 strings out of 493029
- 61895 string characters out of 6136234
- 137979 words of memory out of 5000000
+ 61900 string characters out of 6136234
+ 137980 words of memory out of 5000000
  8419 multiletter control sequences out of 15000+600000
  15623 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -718,10 +718,10 @@ ublic/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1
 texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/pu
 blic/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm10
 00.pfb>
-Output written on u2i_gqr701.pdf (3 pages, 177869 bytes).
+Output written on u2i_gqr701.pdf (3 pages, 143402 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 61 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
