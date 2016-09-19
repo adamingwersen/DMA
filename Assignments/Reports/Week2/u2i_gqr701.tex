@@ -12,6 +12,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{eso-pic}
 \usepackage{gensymb}
+\usepackage{listings}
 
 \newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
 
@@ -109,13 +110,13 @@ Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor.
 \caption{Tæl antal inversioner i A}
 \begin{algorithmic}[2]
 \Function {CountInv}{$A, n$}
-\State \parbox[t]{.7\linewidth}{inv = 0}\parbox[t]{.7\linewidth}{$c_1$}
-\State \parbox[t]{.7\linewidth}{for i = 0 to n - 2}\parbox[t]{.7\linewidth}{$c_2\cdot{n-1}$}
+\State \parbox[t]{.7\linewidth}{inv = 0}
+\State \parbox[t]{.7\linewidth}{for i = 0 to n - 2}
 \Indent
-\State \parbox[t]{.7\linewidth}{for j = i+1 to n - 1}\parbox[t]{.7\linewidth}{$c_3\cdot{\sum_{j=1}^{n}(t_j-1)}$}
+\State \parbox[t]{.7\linewidth}{for j = i+1 to n - 1}
 \Indent
-\State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}\parbox[t]{.7\linewidth}{$c_4\cdot{\sum_{j=1}^{n}(t_j-1)}$}
-\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}\parbox[t]{.7\linewidth}{$c_5\cdot{\sum_{j=1}^{n}(t_j-1)}$}
+\State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}
+\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}
 \EndIndent
 \EndIndent
 \State \Return {inv}
@@ -127,12 +128,27 @@ En alternativ løsning til den 'fladpandede' lineære søgning ville være, at a
 
 \subsection*{Del 4}
 
-For at analysere algoritmens køretid, anvendes tilgangen beskrevet i CLRS 2.2. 
+For at analysere algoritmens køretid, anvendes tilgangen beskrevet i CLRS 2.2. Her er vi umiddelbart kun interesserede i de led, der påvirker køretiden, når $n\rightarrow \infty$, så at sige. Af denne årsag, betragtes udelukkende de iterative led i $CountInv(A,n)$. Leddene har en multiplikativ relation. Det sidste for-loop aftager i  antallet af gentagelser som funktion af i's placering, mens det første for-loop gentages $n-1$ gange.
 
 $$
-k = (n-1)\cdot{(n-1)\cdot{n-2}/2}
+rt \approx \Theta((n-1)\cdot\frac{(n-1)((n-1)+1)}{2}) =
+$$
+$$
+\Theta((n-1)\cdot\frac{n^{2}- n}{2}) =
+$$
+$$
+\Theta(\frac{n\cdot(n-1)^{2}}{2})
 $$
 
+Ved at plotte de køretiden mod f.eks. $n^{2}$, ses det, at algoritmen ved store n vil opnå respektable køretider sammenlignet med to 'komplette' for-loops, som ville foretage en masse unødvendige evalueringer. For at konstruere plottet er der anvendt R-kode, som er vedlagt i bilag.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.3]{Runtime2.png}
+\caption{Algoritmens køretid sammenlignet med $n^{2}$}
+\end{figure}
+
+\subsection*{Bilag}
 
 
 
