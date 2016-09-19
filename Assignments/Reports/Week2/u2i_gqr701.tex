@@ -63,8 +63,7 @@
 
 \subsection*{Del 1}
 Antallet af inversioner kan bestemmes ved at tælle det samlede antal 'ikke-sorterede' placeringer af elementerne i A. For arrray bestående af følgende $n = 6$ elementer; [2,1,8,4,3,6] er der sammenlagt \underline{5} inversioner. 
-\linebreak
-
+\\
 \subsection*{Del 2}
 En generel formel for at finde det maksimale antal inversioner, k, i et array bestående af n vilkårlige elementer kan bestemmes ved:
 $$
@@ -110,13 +109,13 @@ Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor.
 \caption{Tæl antal inversioner i A}
 \begin{algorithmic}[2]
 \Function {CountInv}{$A, n$}
-\State \parbox[t]{.7\linewidth}{inv = 0}
-\State \parbox[t]{.7\linewidth}{for i = 0 to n - 1}
+\State \parbox[t]{.7\linewidth}{inv = 0}\parbox[t]{.7\linewidth}{$c_1$}
+\State \parbox[t]{.7\linewidth}{for i = 0 to n - 1}\parbox[t]{.7\linewidth}{$c_2\cdot{n-1}$}
 \Indent
-\State \parbox[t]{.7\linewidth}{for j = i+1 to n}
+\State \parbox[t]{.7\linewidth}{for j = i+1 to n}\parbox[t]{.7\linewidth}{$c_3\cdot{\sum_{j=1}^{n}(t_j-1)}$}
 \Indent
-\State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}
-\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}
+\State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}\parbox[t]{.7\linewidth}{$c_4\cdot{\sum_{j=1}^{n}(t_j-1)}$}
+\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}\parbox[t]{.7\linewidth}{$c_5\cdot{\sum_{j=1}^{n}(t_j-1)}$}
 \EndIndent
 \EndIndent
 \State \Return {inv}
@@ -128,7 +127,9 @@ En alternativ løsning til den 'fladpandede' lineære søgning ville være, at a
 
 \subsection*{Del 4}
 
-Her mangler noget :)
+For at analysere algoritmens køretid, anvendes tilgangen beskrevet i CLRS 2.2. 
+
+
 
 
 \end{document}
