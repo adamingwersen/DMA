@@ -7,12 +7,12 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{program}
 \usepackage{amsmath}
-\usepackage[danish,english]{babel}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage{eso-pic}
 \usepackage{gensymb}
 \usepackage{listings}
+\usepackage{float}
 
 \newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
 
@@ -80,7 +80,7 @@ Dette kan bl.a. skrives på følgende måde ved iterativ pseudokode:
 \State \parbox[t]{.7\linewidth}{v = 0}
 \State \parbox[t]{.7\linewidth}{for i = 1 to n}
 \Indent
-\State \parbox[t]{.7\linewidth}{$v = (i-1) + v$}
+\State \parbox[t]{.7\linewidth}{v = (i-1) + v}
 \EndIndent
 \State \Return {v}
 \EndFunction
@@ -102,11 +102,9 @@ Denne delopgave kan løses på adskillige måder - både rekursivt og iterativt.
 \item{Afslut ved at returnere den akkumulerede værdi for 'inv'}
 \end{enumerate}
 
-\pagebreak
-
 Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor. 
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Tæl antal inversioner i A}
 \begin{algorithmic}[2]
 \Function {CountInv}{$A, n$}
@@ -116,7 +114,7 @@ Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor.
 \State \parbox[t]{.7\linewidth}{for j = i+1 to n - 1}
 \Indent
 \State \parbox[t]{.7\linewidth}{if $A[i] > A[j]$}
-\State \parbox[t]{.7\linewidth}{$inv = inv + 1$}
+\State \parbox[t]{.7\linewidth}{inv = inv + 1}
 \EndIndent
 \EndIndent
 \State \Return {inv}
@@ -124,11 +122,13 @@ Algoritmen er beskrevet i et mere koncist format i pseudokoden nedenfor.
 \end{algorithmic}
 \end{algorithm}
 
+
 En alternativ løsning til den 'fladpandede' lineære søgning ville være, at anvende merge-sort med et if-statement og en tælle-variabel i den afsluttende 'merge'-del.
 
 \subsection*{Del 4}
 
-For at analysere algoritmens køretid, anvendes tilgangen beskrevet i CLRS 2.2. Her er vi umiddelbart kun interesserede i de led, der påvirker køretiden, når $n\rightarrow \infty$, så at sige. Af denne årsag, betragtes udelukkende de iterative led i $CountInv(A,n)$. Leddene har en multiplikativ relation. Det sidste for-loop aftager i  antallet af gentagelser som funktion af i's placering, mens det første for-loop gentages $n-1$ gange.
+For at analysere algoritmens køretid, anvendes tilgangen beskrevet i CLRS 2.2. Her er vi umiddelbart kun interesserede i de led, der påvirker køretiden, når $n\leftarrow \infty$, så at sige. Af denne årsag, betragtes udelukkende de iterative led i $CountInv(A,n)$. Leddene har en multiplikativ relation. Det sidste for-loop aftager i  antallet af gentagelser som funktion af i's placering, mens det første for-loop gentages $n-1$ gange.
+\newline
 
 $$
 rt \approx \Theta((n-1)\cdot\frac{(n-1)((n-1)+1)}{2}) =
@@ -139,17 +139,17 @@ $$
 $$
 \Theta(\frac{n\cdot(n-1)^{2}}{2})
 $$
-
-Ved at plotte de køretiden mod f.eks. $n^{2}$, ses det, at algoritmen ved store n vil opnå respektable køretider sammenlignet med to 'komplette' for-loops, som ville foretage en masse unødvendige evalueringer. For at konstruere plottet er der anvendt R-kode, som er vedlagt i bilag.
-
+\\
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.3]{Runtime2.png}
+\includegraphics[scale = 0.5]{plotR1.png}
 \caption{Algoritmens køretid sammenlignet med $n^{2}$}
 \end{figure}
 
+Ved at plotte køretiden mod f.eks. $n^{2}$, ses det, at algoritmen ved store n vil opnå eksponentielt højere køretider i takt med at $n\leftarrow\infty$. Dette må anses for at være en direkte effekt af det voksende antal mulige sammensætninger. 
+For at konstruere plottet er der anvendt R-kode, som er vedlagt i bilag. 
+
 \subsection*{Bilag}
-
-
-
+\lstinputlisting[language=R]{plotRuntime.R}
+ 
 \end{document}
