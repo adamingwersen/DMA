@@ -1,0 +1,37 @@
+\documentclass[11pt,a4paper,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+
+\subsection*{Del 3}
+
+Vi betragter følgende udtryk: 
+$$
+\sum_{k=0}^{n} (2k+1)
+$$
+
+Vi ønsker, at lade $k$ starte i nul, med det formål at være i stand til at anvende reglerne fra formelsamlingen. Det ses, at $2\cdot0+1 = 1$, hvorved den første iteration af sumfølgen altid vil være 1 - dette kan bruges, så:
+$$
+= 1 + \sum_{k=1}^{n} (2k+1)
+$$
+Herefter kan vi anvende, at $\sum_{k=1}^{n} 1 = n$, samt at $\sum_{k=1}^{n}c \cdot a_{k} = c \cdot \sum_{k=1}^{n}a_{k}$, sådan at:
+$$
+1 + \sum_{k=1}^{n} (2k+1) = 1 + n + 2 \cdot \sum_{k=1}^{n}k
+$$
+Hertil ved vi, at $\sum_{k=1}^{n}k = \sum_{k=1}^{n}\frac{n^{2}+n}{2}$. Herved har vi opnået den eksplicitte form for sumfølgen:
+$$
+1 + n + 2 \cdot \sum_{k=1}^{n}k = 1 + n + 2 \cdot \frac{n^{2}+n}{2} = 
+$$
+$$
+\underline{\underline{1 + 2n + n^{2}}}
+$$
+
+\end{document}
+
