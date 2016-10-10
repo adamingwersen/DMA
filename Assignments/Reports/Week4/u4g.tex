@@ -1,0 +1,189 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{float}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 4g} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Aske Fjellerup & \\ Adam Ingwersen \\ Peter Friborg \\ Hold 4\\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{2i}
+	\author{Mr. X}
+	
+	\newpage
+
+\newpage
+
+
+
+
+\section*{Del 1}
+    \subsection*{(a)} \subsubsection*{Hvilke attributer skal hver knude på listen indeholde?}
+Hvert objekt skal indeholde 3 attributer:
+\begin{itemize}
+    \item prev  (Previous objekt) 
+    \item key   (Key value)
+    \item next  (Next objekt)
+\end{itemize}
+
+\begin{algorithm}
+\caption{Pseudokode der indsætter heltallet \textit{z} på listen L}
+\begin{algorithmic}[1]
+\Function {insertZ}{$(L, z)$}
+\State \parbox[t]{.7\linewidth}{z = Objekt}
+\State \parbox[t]{.7\linewidth}{L[head] = z.prev}
+\State \parbox[t]{.7\linewidth}{L[head+1] = z.key}
+\State \parbox[t]{.7\linewidth}{L[tail] = z.next}
+\State \parbox[t]{.7\linewidth}{z.next = NIL}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\subsection*{(b)}
+I denne opgave skal der opskrives pseudokode til at indsætte et objekt på en sorteret liste. 
+
+\begin{algorithm}[H]
+\caption{Pseudokode, der indsætter objekt i rækkefølge på en sorteret liste}
+\begin{algorithmic}[2]
+\Function {insertSort}{$L, z$}
+\State \parbox[t]{.7\linewidth}{if $F[i].key \leq z.key $}
+\Indent
+\State \parbox[t]{.7\linewidth}{$Z.next \gets F[i].next $}
+\State \parbox[t]{.7\linewidth}{$Z.prev \gets F[i].prev $}
+\State \parbox[t]{.7\linewidth}{$F[i].next.prev \gets Z $}
+\State \parbox[t]{.7\linewidth}{$F[i].next \gets Z $}
+\State \Return {F[i].next}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{else $i \gets i+1$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{(c)}
+Idet vi kører listen igennem et objekt ad gangen og der er n objekter, vil funktionen i værstetilfælde køre igennem n gange. Det er ikke muligt at bruge binærsøgning da det er en dobbelthægtet liste. Derfor kommer vi frem til at køretiden er $\theta (n)$
+
+
+
+\subsection*{(d)}
+Hvis vi prøver at bruge vores funktion på den omvendt sorterede liste vil den køre igennem $n^2/2$ hvilket er netop $O(n^2)$. 
+
+\pagebreak
+\section*{Del 2}
+\subsection*{(a)}
+\large
+Opdeling af S\\
+\normalsize
+I denne opgave inddeler vi den hægtede liste, S af længden n, i k mindre hægtede lister, $l_1, l_2 ... l_k$ af længden k. k er defineret ved $k = \sqrt{n}$.\\ 
+Listen S opdeles ved at dele listen i $\sqrt{n}$ dele elementer i hver inddeling.\\
+\\
+\large
+Oprettelse af B \\
+\normalsize
+Listen B skal have k elementer med en peger. Pegerne peger mod det første element af henholdvist, $i_1, i_2 ... i_k$ for elementerne gående mod k.\\
+\begin{algorithm}[H]
+\caption{Pseudokode, der opretter B via opdeling af S}
+\begin{algorithmic}[4]
+\Function {createB}{$S$}
+\State \parbox[t]{.7\linewidth}{Lad B[0..$\floor\sqrt{n}$] være en liste}
+\State \parbox[t]{.7\linewidth}{Lad S[0..n-1] være en sorteret liste}
+\State \parbox[t]{.7\linewidth}{$k = \sqrt{n}$}
+\State \parbox[t]{.7\linewidth}{$i \leftarrow 0$}
+\State \parbox[t]{.7\linewidth}{while $i \leq k$}
+\Indent
+\State \parbox[t]{.7\linewidth}{Lad $L_{i}$ være en liste af længde k}
+\State \parbox[t]{.7\linewidth}{$L_{i} \leftarrow S[(i\cdot k)..(((i+1)\cdot k)-1)]$}
+\State \parbox[t]{.7\linewidth}{$B[i] \leftarrow L_{i}$}
+\Indent
+\State \parbox[t]{.7\linewidth}{if $i = 0$}
+\State \parbox[t]{.7\linewidth}{$B.head \leftarrow NIL$}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{$B[i-1].next \leftarrow B[i]$}
+\State \parbox[t]{.7\linewidth}{$B[i].prev \leftarrow B[i-1]$}
+\State \parbox[t]{.7\linewidth}{$i \leftarrow i + 1$}
+\EndIndent
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+\large
+Oprettelse af B \\
+\normalsize
+Køretiden vil være $\theta(\sqrt{n})$, det tager $c_1\sqrt{n}$ tid at opdele S i $k$ dele da S er en dobbelthægtet liste. B tager $c_2\sqrt{n}$ tid at oprette da der 3 pegere pr element der skal defineres og der er k elementer. tiden bliver derfor $$\underline{\underline{c\sqrt{n}=\theta(\sqrt{n})}}$$
+\subsection*{(b)}
+Der findes n elementer i S. Det betyder at der i den mindre liste B, vil være $\sqrt{n}$ elementer at løbe igennem. Vi kommer derfor frem til at køretiden vil være O($\sqrt{n}$). \pagebreak 
+\subsection*{(c)}
+Her opskrives en funktion, G, til at indsætte heltallet x i listen S, ved brug af den mindre liste B. 
+
+\begin{algorithm}[H]
+\caption{Pseudokode, der indsætter objekt i rækkefølge på listen S, ved brug af hjælpelisten B}
+\begin{algorithmic}[2]
+\Function {G}{$S, B, x$}
+\State \parbox[t]{.7\linewidth}{$i \gets 0$}
+\State \parbox[t]{.7\linewidth}{repeat}
+\State \parbox[t]{.7\linewidth}{if $B[i].pa \geq x$}
+\Indent
+\State \parbox[t]{.7\linewidth}{repeat}
+\State \parbox[t]{.7\linewidth}{if $S[i].key \leq x$}
+\Indent
+\State \parbox[t]{.7\linewidth}{$x.next \gets S[i].next $}
+\State \parbox[t]{.7\linewidth}{$x.prev \gets S[i] $}
+\State \parbox[t]{.7\linewidth}{$S[i].next.prev \gets x $}
+\State \parbox[t]{.7\linewidth}{$S[i].next \gets x $}
+\State \Return {S[i].next}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{else $i \gets i-1$}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{else $i \gets i+1$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+Det ses i linje 4 og 6 at vi først søger efter om pegeren på B er større end x. Herefter skal vi finde den helt rigtige placering på S og derfor spørger vi om S[i].key er mindre end, for ellers er vi nødt til at gå en lille smule tilbage på listen, for at finde det helt rigtige sted.
+\end{document}
