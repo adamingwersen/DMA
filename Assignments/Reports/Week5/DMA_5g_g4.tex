@@ -1,0 +1,103 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{float}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 5g} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Adam Ingwersen,& \\ Peter Friborg,& \\ Aske Fjellerup\\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{5g}
+	\author{ncog}
+	
+	\newpage
+
+\newpage
+
+\subsection*{Del 1}
+\subsubsection*{(1)}
+Her udregnes GCD(Greatest Common Divisor) for tallene (8,5) hhv. (13,8). 
+
+\begin{itemize}
+\item{\textbf{GCD(8,5):}}
+\item{$8 = 1 \cdot 5 + 3$}
+\item{$5 = 1 \cdot 3 + 2$}
+\item{$3 = 1 \cdot 2 + 1$}
+\item{$2 = 2 \cdot 1 + 0$}
+\item{$\rightarrow GCD(8,5) = 1$}
+\end{itemize}
+
+\begin{itemize}
+\item{\textbf{GCD(13,8):}}
+\item{$13 = 1 \cdot 8 + 5$}
+\item{$8 = 1 \cdot 5 + 3$}
+\item{$5 = 1 \cdot 3 + 2$}
+\item{$3 = 1 \cdot 2 + 1$}
+\item{$2 = 2 \cdot 1 + 0$}
+\item{$\rightarrow GCD(13,8) = 1$}
+\end{itemize}
+
+Tallene i figur 1 angiver antallet af nødvendige operationer for at bestemme GCD for en bestemt kombination af tal. GCD(8,5) tager 4 operationer - og derved indsættes tallet 4 i den celle, hvor 5. række og 8. kolonne krydser. For GCD(13,8) skal der stå 5. 
+
+\subsubsection*{(2)}
+Lad $T = [t_{1}, t_{2},...,t_{15}]$ være et array, som udfyldes med et worst-case antal operationer for $t_{n}$:
+$$
+T = [1, 1, 2, 2, 3, 2, 3, 4, 3, 3, 4, 4, 5, 4, 4]
+$$
+
+\subsection*{(3)}
+
+
+
+\end{document}
+
+
+
+
+
