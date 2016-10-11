@@ -1,0 +1,160 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{float}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 5g} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Adam Ingwersen,& \\ Peter Friborg,& \\ Aske Fjellerup\\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{5g}
+	\author{ncog}
+	
+	\newpage
+
+\newpage
+
+\subsection*{Del 1}
+\subsubsection*{(1)}
+Her udregnes GCD(Greatest Common Divisor) for tallene (8,5) hhv. (13,8), efter samme notation som anført på s.23 i KBR.
+
+\begin{itemize}
+\item{\textbf{GCD(8,5):}}
+\item{$8 = 1 \cdot 5 + 3$}
+\item{$5 = 1 \cdot 3 + 2$}
+\item{$3 = 1 \cdot 2 + 1$}
+\item{$2 = 2 \cdot 1 + 0$}
+\item{$\rightarrow GCD(8,5) = 1$}
+\end{itemize}
+
+\begin{itemize}
+\item{\textbf{GCD(13,8):}}
+\item{$13 = 1 \cdot 8 + 5$}
+\item{$8 = 1 \cdot 5 + 3$}
+\item{$5 = 1 \cdot 3 + 2$}
+\item{$3 = 1 \cdot 2 + 1$}
+\item{$2 = 2 \cdot 1 + 0$}
+\item{$\rightarrow GCD(13,8) = 1$}
+\end{itemize}
+
+Tallene i figur 1 angiver antallet af nødvendige operationer for at bestemme GCD for en bestemt kombination af tal. GCD(8,5) tager 4 operationer - og derved indsættes tallet 4 i den celle, hvor 5. række og 8. kolonne krydser. For GCD(13,8) skal der stå 5. Se Bilag.
+
+
+\subsubsection*{(2)}
+Lad $T = [t_{1}, t_{2},...,t_{15}]$ være et array, som udfyldes med et worst-case antal operationer for $t_{n}$:
+$$
+T = [1, 1, 2, 2, 3, 2, 3, 4, 3, 3, 4, 4, 5, 4, 4]
+$$
+
+Her observeres det, at hvert "uptick" i køretid forekommer ved Fibonacci-tal(Hvor $[f_{1}=1, f_{2}=1, f_{3}=2, f_{4}=3, f_{5}=5, f_{6}=8, f_{7}=13, f_{8}=21,...$]). Det gælder for Fibonacci-tal, at $f_{k} = f_{k-1} + f_{k-2}$. 
+
+\subsubsection*{(3)}
+
+Euklids algoritme vil opnå worst-case køretid, når de to tal a og b's største divisor er 1- eftersom dette implicerer, det højeste antal mulige delinger af et sæt af tal. 
+Dette er altid tilfældet ved Fibonacci tal, der ved første operation i $GCD(f_{k}, f_{k-1})$ vil returnere.
+\begin{equation}
+f_{k} = 1 \cdot f_{k-1} + f_{k-2} = 1 \cdot f_{k} + f_{k} \mod f_{k-1}
+\end{equation}
+Givet Fibonacci-tallenes konstruktion, vil denne sekvens altid resultere i, at GCD af to Fibonacci-tal er lig 1. 
+Således, for et vilkårligt sæt (a,b) af positive naturlige tal; 
+\begin{equation}
+\text{for  $n \in \mathbb{N}^{+}$  hvor $ a \geq b \in n$,}
+\end{equation}
+
+...til to Fibonacci-tal altid resultere i den højeste køretid for GCB(a,b), når $a=f_{k}, b=f_{k-1}$.
+
+Et generelt eksempel for køretiden af Euklids GCD ved et sæt af to konsekutive Fibonacci-tal præsenteres nedenfor:
+
+\begin{itemize}
+\item{\textbf{GCD($f_{k},f_{k-1}$):}}
+\item{$f_{k} = f_{k-1} + f_{k} \mod f_{k-1}$}
+\item{$f_{k-1} = f_{k-2} + f_{k-1} \mod f_{k-2}$}
+\item{$f_{k-2} = f_{k-3} + f_{k-2} \mod f_{k-3}$}
+\item{...}
+\item{$f_{k-(k-2)} = 2 \cdot f_{1} + f_{k-(k-2)} \mod f_{1} = 2 \cdot 1 + f_{1} \mod f_{k-(k-2)} = 2 + 0$}
+\item{$\rightarrow GCD(f_{k},f_{k-1}) = 1$}
+\end{itemize}
+Givet ovenstående sekvens er det klart, at algoritmen må terminere efter $k-1$ operationer, da både $f_{1} = f_{2} = 1$.  Dette vil i store-O-notation implicere en worst-case når (2) er overholdt:
+$$
+\text{$t_{n}$  er $ O(n)$}
+$$
+
+\subsubsection*{(4)}
+
+Det fremgår af opgavebeskrivelsen, at $n \geq a \geq b > 0$. Dette sætter de nedre grænser for mulige værdier af a og b - men ikke de øvre. En vilkårlig sekvens af Fibonacci-tal der overholder $n > a > b > 1$, vil overholde ulighederne defineret, men vil resultere i en køretid, der vokser i takt med at inputs vokser langs Fibonacci-sekvensen. En konstant køretid opnås udelukkende i best-case; $n \geq a = b > 0$. Herved har vi, at:
+
+$$
+\text{$t_{n}$  er $ \Omega(1)$}
+$$
+
+\subsubsection*{(5)}
+
+Grafen ser ikke ud til, at indikere en lineær vækst i antal operationer over værdier for $n$. Som funktion af $n$, ser antallet af operationer ud til at være aftagende. Dette skyldes, at ovenstående retfærdiggørelse i store-O notation er 'løs' idet $t_{n} er O(n)$ angiver en øvre grænse - men dette kan præciseres. \newline 
+Det blev fastslået, at GCD($f_{k},f_{k-1}$) terminerer efter k-1 operationer. Afstanden mellem Fibonacci-tal stiger eksponentielt over k, vi kan derfor skrive, at $k \approx \gamma log(n)$, hvor gamma er en konstant. Dette kan vi netop fordi, at der for Fibonacci-tal gælder, at mængden n skal stige eksponentielt over k - og for hver ekstra operation kræves det næste tal i sekvensen, som er eksponentielt voksende over n. \newline
+Da vi nu ved, at $k$ kan approksimeres ved $\gamma log(n)$, og at køretiden for GCD kan skrives som $O(n)$, må det da også gælde, at $t_{n}$ er $O(log(n))$. Hermed er upper-bound indsnævret. Det er her klart, at med den nedre grænse fundet i (4), må $t_{n}$ ligeledes være $\Omega(log(n))$, da det i selve best-case scenariet er ækvivalent med $ \Omega(1)$. \newline
+Idet vi har identificeret en funktion, der tilfredsstiller:
+$$
+t_{n} = O(log(n)) og t_{n} = \Omega(log(n))
+$$
+...siger vi, at:
+$$
+t_{n} = \Theta(log(n))
+$$
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
