@@ -1,0 +1,200 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{float}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 6i} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Adam Ingwersen,& \\ GQR701 \\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{5g}
+	\author{ncog}
+	
+	\newpage
+
+\newpage
+
+\section*{Del 1}
+Vi betragter Fibonaccitallene og disses definition; $F_{0} = 0, F_{1} = 1$ og derefter:
+$$
+F_{n} = F_{n-1} + F_{n-2} \quad \forall n \leq 2
+$$
+\subsection*{(1)}
+Ved præsentation af induktionsbevis fremvises først og fremmest et basis-step, der efterviser, at $P(n_{0})$ gælder. Herefter gøres en antagelse om $P(n)$. Ud fra denne antagelse forsøges det at vise, at $P(n) \implies P(n+1)$ er en tautologi - dette er sandt når implikationspilen er sand. 
+\newline
+\subsubsection*{Basis-step}
+$$
+P(2): \quad F_{2} = F_{1} + F{0} = 1 \leq 2^{2} = 4
+$$
+\subsubsection*{Induktions-step}
+Vi gør os nu en antagelse om $P(k)$:
+$$
+P(k): \quad F_{k} \leq 2^{k}
+$$
+
+Nu skal det vises, at $P(k+1)$ gælder givet definitionen af Fibonacci-sekvensen defineret i Del 1:
+$$
+P(k+1): \quad F_{k+1} = F_{k} + F_{k-1} \leq 2^{k+1} = 2 \cdot 2^{k} = F_{k} + F{k}
+$$
+Givet den rekursive definition af $F_{n}$ gælder det, at:
+$$
+P(k+1): \quad F_{k} + F_{k-1} \leq F_{k} + F_{k}
+\quad \quad \forall k \in \mathbb Z^{+} \quad \quad Q.E.D.
+$$
+
+Altså, er $P(k+1)$ sand. Efter princippet for matematisk induktion gælder det, at $P(n)$ er sand for alle $n \geq 1$
+
+\subsection*{(2)}
+\subsubsection*{Basis-step}
+$$
+P(6): \quad F_{6} = 8 \geq \frac{3}{2}^{5} \approx 7,6
+$$
+Base-case, $P(6)$, er sand. Nu skal det vises, at nedenstående gælder. 
+$$
+F_{n} \geq (\frac{3}{2})^{n-1} \quad \forall n \in \{6, 7, 8,...\}
+$$
+
+\subsubsection*{Induktions-step}
+Givet, $P(6)$ sand, antages $P(k)$ sand. 
+
+\begin{equation}
+\begin{aligned}	
+F_{k+1}	 	= 		& F_{k} + F_{k-1} \\
+			\geq	& (\frac{3}{2})^{k-1} + (\frac{3}{2})^{k-2} \\
+			=		& (\frac{3}{2})^{k-2} \cdot (\frac{3}{2} + 1) \\
+			>		& (\frac{3}{2})^{k-2} \cdot (\frac{3}{2})^{2} \\
+			=		& (\frac{3}{2})^{k} \\
+			\implies & F_{k+1} \geq (\frac{3}{2})^{k} \quad Q.E.D.
+\end{aligned}
+\end{equation}
+
+Hermed vist. Det bemærkes, at vores basis-step bryder sammen for $n < 6$ - hvorfor det gælder:
+$$
+F_{n+1} \geq (\frac{3}{2})^{n} \quad \forall n \in \{6, 7, 8,...\}
+$$
+
+\subsection*{(3)}
+
+For at bestemme tids-kompleksiteten af Fibonacci-sekvensen, skal vi undersøge, hvor mange led der skal udregnes før et vilkårligt $F_{n}$ er identificeret. Givet den rekursive definition af $F_{n}$, skal vi finde en funktion der tilfredsstiller:
+$$
+F_{1} = 1 \quad \wedge \quad
+F_{n} = F_{n-1} + F_{n-2}
+$$
+
+En funktion, der tilfredsstiller disse: 
+$$
+k^{n} = k^{n-1}+k^{n-2}
+$$
+
+Altså, vil en eksponentiel funktion tilfredsstille kriterierne. Dvs, at $log_{2}$ til en eksponentialfunktion over positive tal er ganske enkelt potensen. Altså, hvis:
+$$
+F_{n} er \Theta(k^{n}) \implies log(F_{n}) \quad er \quad \Theta(n)
+$$
+
+Dette resultat er illustreret nedenfor - R-kode er vedlagt i bilag. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.5]{fibSeq.png}
+\end{figure}
+
+\section*{Del 2}
+\subsection*{(1)}
+Algoritmen MUL bestemmer hvorvidt to positive tal, $a,\quad b \in \mathbb Z^{+}$ går op i hinanden. Variablen y tæller antallet af gange, a kan divideres med b - eller rettere, hvor mange gange b går op i a. Det formodes, at der med illustrative eksempler menes et par repræsentative eksempler af algoritmens virken:
+\begin{equation}
+\begin{aligned}	
+MUL(10, 5)		\implies	& x = 10, y = 0 \rightarrow x = 10-5 = 5, y = 1 \rightarrow  x = 5-5 = 0, y = 2 \\
+				\implies	& x = 0, y = 2, RETURN = TRUE \\
+MUL(11, 6)		\implies 	& x = 11, y = 0 \rightarrow  x = 11-6 = 5, y = 1 \rightarrow END LOOP: x \ngeq b \\
+				\implies	& x = 5, y = 1, RETURN = FALSE
+\end{aligned}
+\end{equation}
+
+\subsection*{(2)}
+\subsubsection*{Basis-step}
+\begin{equation}
+\begin{aligned}	
+x_{0} 					= & a \\
+y_{0}					= & 0 \\
+x_{0} +b\cdot y_{0} 	= & a \\
+\implies x_{0} 			= & a
+\end{aligned}
+\end{equation}
+$P(0)$ er altså sand. 
+
+\subsubsection*{Induktions-step}
+Med udgangspunkt i $P(0)$ antager vi, at $P(k)$ er sand, sådan at:
+$$
+P(k): \quad x_{k} + b \cdot y_{k} = a \iff x_{k} = a - b \cdot y_{k}
+$$
+Viser nu, at $P(k+1)$ er sand. Vi ved, at $y_{k+1} = y_{k} + 1$ pr. definition
+\begin{equation}
+\begin{aligned}	
+x_{k+1} = & a - b \cdot y_{k+1} \\
+x_{k+1} = & x_{k} + b \cdot y_{k} - b \cdot y_{k+1} \\
+x_{k+1} = & x_{k} + b \cdot y_{k} - b(y_{k} + 1) \\
+x_{k+1} = & x_{k} - b \\
+x_{k+1} = & x_{k} - b = a - b \cdot y_{k+1} = a - b \cdot (y_{k} + 1) + b \\
+\implies  & x_{k} = a - b \cdot y_{k} \\
+\implies  & a = x_{k} + b\cdot y_{k}
+\end{aligned}
+\end{equation}
+
+Det er hermed vist, at for hver iteration af while-løkken, vil $x$ falde med $b$, mens $y$ forøges med 1, hvorpå $b$ er ganget. Dette er altså en eksakt formulering af algoritmens virken. 
+
+\subsection*{(3)}
+
+Jeg ved ikke, hvordan denne del er anderledes end den forrige delopgave. 
+
+\newpage
+
+\section*{Bilag}
+\lstinputlisting[language=R]{fibSeq.R}
+
+\end{document}
