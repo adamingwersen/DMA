@@ -63,14 +63,14 @@
 \section*{Del 1}
 Vi betragter Fibonaccitallene og disses definition; $F_{0} = 0, F_{1} = 1$ og derefter:
 $$
-F_{n} = F_{n-1} + F_{n-2} \quad \forall n \leq 2
+F_{n} = F_{n-1} + F_{n-2} \quad \forall n \geq 2
 $$
 \subsection*{(1)}
 Ved præsentation af induktionsbevis fremvises først og fremmest et basis-step, der efterviser, at $P(n_{0})$ gælder. Herefter gøres en antagelse om $P(n)$. Ud fra denne antagelse forsøges det at vise, at $P(n) \implies P(n+1)$ er en tautologi - dette er sandt når implikationspilen er sand. 
 \newline
 \subsubsection*{Basis-step}
 $$
-P(2): \quad F_{2} = F_{1} + F{0} = 1 \leq 2^{2} = 4
+P(1): \quad F_{2} = F_{1} + F_{0} = 2 \leq 2^{1} = 2
 $$
 \subsubsection*{Induktions-step}
 Vi gør os nu en antagelse om $P(k)$:
@@ -101,7 +101,11 @@ F_{n} \geq (\frac{3}{2})^{n-1} \quad \forall n \in \{6, 7, 8,...\}
 $$
 
 \subsubsection*{Induktions-step}
-Givet, $P(6)$ sand, antages $P(k)$ sand. 
+Det vises, at også $P(7)$ sand:
+$$
+P(7) : F_{7} = 13 \geq \frac{3}{2}^6 \approx 11,39
+$$
+Givet, $P(6)$ og $P(7)$ sand, antages $P(k-1)$ samt $P(k)$ sand, således at:
 
 \begin{equation}
 \begin{aligned}	
@@ -127,17 +131,7 @@ F_{1} = 1 \quad \wedge \quad
 F_{n} = F_{n-1} + F_{n-2}
 $$
 
-En funktion, der tilfredsstiller disse: 
-$$
-k^{n} = k^{n-1}+k^{n-2}
-$$
-
-Altså, vil en eksponentiel funktion tilfredsstille kriterierne. Dvs, at $log_{2}$ til en eksponentialfunktion over positive tal er ganske enkelt potensen. Altså, hvis:
-$$
-F_{n} er \Theta(k^{n}) \implies log(F_{n}) \quad er \quad \Theta(n)
-$$
-
-Dette resultat er illustreret nedenfor - R-kode er vedlagt i bilag. 
+Fra delopgave 1.1 har vi, at $F_{n}$ er $\Omega
 
 \begin{figure}[H]
 \centering
