@@ -30,7 +30,7 @@
 		\vspace*{5cm}
 		\begin{center}
 			\Huge \textbf{Diskret Matematik og Algoritmer} \\
-			\LARGE \textbf{Aflevering 6i} \\
+			\LARGE \textbf{Aflevering 6i (Genaflevering)} \\
 		\end{center}
 		\vspace*{3.5cm}
 		\begin{flushleft}
@@ -131,7 +131,16 @@ F_{1} = 1 \quad \wedge \quad
 F_{n} = F_{n-1} + F_{n-2}
 $$
 
-Fra delopgave 1.1 har vi, at $F_{n}$ er $\Omega$
+Vi ved, at $F_{n}$ er $\Omega (\frac{3}{2}^{n-1})$, samt $O (2^{n})$. Dette er $F_{n}$'s lower- hhv. upper-bound. Mellem disse to funktioner findes en $\Theta$-repræsentation af $F_{n}$. For at finde køretiden af $log_{2}F_{n}$, tages 2-tals logaritmen til de to udtryk, hvor ulighedstegn anvendes for at indikere, at $log_{2}F_{n}$ ligger imellem:
+
+\begin{equation}
+\begin{aligned}	
+\Omega (log_{2}\frac{3}{2}^{n-1}) \leq log_{2}F_{n} \leq  O (log_{2}2^{n}) \\
+\implies k \cdot (n-1) \leq log_{2}F_{n} \leq n
+\end{aligned}
+\end{equation}
+
+Altså, ligger $log_{2}F_{n}$ mellem to lineære funktioner af n, således at det asymptotisk gælder, at $log_{2}F_{n}$ er $\Theta(n)$. Logaritmen til Fiboancci-sekvensen har konstant tids-kompleksitet, hvorved vi kan udlede, at tidskompleksiteten af Fibonacci-sekvensen må være non-lineær.  
 
 \begin{figure}[H]
 \centering
@@ -167,24 +176,60 @@ Med udgangspunkt i $P(0)$ antager vi, at $P(k)$ er sand, sådan at:
 $$
 P(k): \quad x_{k} + b \cdot y_{k} = a \iff x_{k} = a - b \cdot y_{k}
 $$
-Viser nu, at $P(k+1)$ er sand. Vi ved, at $y_{k+1} = y_{k} + 1$ pr. definition
+Det skal eftervises, at der efter $n$ gennemløb af while-løkken gælder:
 \begin{equation}
 \begin{aligned}	
-x_{k+1} = & a - b \cdot y_{k+1} \\
-x_{k+1} = & x_{k} + b \cdot y_{k} - b \cdot y_{k+1} \\
-x_{k+1} = & x_{k} + b \cdot y_{k} - b(y_{k} + 1) \\
-x_{k+1} = & x_{k} - b \\
-x_{k+1} = & x_{k} - b = a - b \cdot y_{k+1} = a - b \cdot (y_{k} + 1) + b \\
-\implies  & x_{k} = a - b \cdot y_{k} \\
-\implies  & a = x_{k} + b\cdot y_{k}
+x_{n} + b\cdot y_{n} = a
 \end{aligned}
 \end{equation}
 
-Det er hermed vist, at for hver iteration af while-løkken, vil $x$ falde med $b$, mens $y$ forøges med 1, hvorpå $b$ er ganget. Dette er altså en eksakt formulering af algoritmens virken. 
+For at vise det generelle tilfælde, betragtes udtrykket ved $n+1$'te gennemløb:
+\begin{equation}
+\begin{aligned}	
+x_{n+1} + b \cdot y_{n+1} = a
+\end{aligned}
+\end{equation}
+
+Vi ved, at $y_{k+1} = y_{k} + 1$ pr. definition. Det ses, at der må gælde:
+\begin{equation}
+\begin{aligned}	
+x_{n+1} = x_{n} - b
+y_{n+1} = y_{n} + 1
+\end{aligned}
+\end{equation}
+
+Lighederne i (7) substitueres ind i (6), hvorved vi får:
+\begin{equation}
+\begin{aligned}	
+x_{n+1} b \cdot y_{n+1} = x_{n} - b + b \cdot (y_{n} + 1) \\
+x_{n+1} b \cdot y_{n+1} = x_{n} - b + b \cdot y_{n} + b \\
+x_{n+1} b \cdot y_{n+1} = x_{n} + b \cdot y_{n} = a
+\end{aligned}
+\end{equation}
+
+Hermed er det vist, induktivt, at $x_{n} + b\cdot y_{n} = a$ i det generelle tilfælde.
 
 \subsection*{(3)}
 
-Jeg ved ikke, hvordan denne del er anderledes end den forrige delopgave. 
+Algoritmen terminerer med FALSE/TRUE. For at dette lader sig gøre, kræves det at $b \geq x \geq 0$ i pseudokoden. Det bemærkes, at vi kan repræsentere $a$ som $ a = n \cdot b + r$, hvor $b > r \geq 0$. I udtrykket er $r$ en rest - vi kan således repræsentere algoritmens udfald (FALSE/TRUE) vhja. $r$, altså to tilfælde: 
+\begin{equation}
+\begin{aligned}	
+b\mid a \implies r = 0 \quad \vee \quad b \nmid a
+\end{aligned}
+\end{equation}
+
+Lad det $q$'te iteration af while-løkken være den terminerende (sidste) iteration. Vi bruger, at $y$ vokser med 1 pr. iteration, og må ved den $q$'te iteration være $q$:
+\begin{equation}
+\begin{aligned}	
+x_{q}  b \cdot y_{q} = a\\
+x_{q} + b \cdot y_{q} = q \cdot b + r \\
+x_{q} = q \cdot b + r - b \cdot y_{q} \\
+x_{q} = q \cdot b + r - b \cdot q \\
+x_{q} = r
+\end{aligned}
+\end{equation}
+
+Altså må algoritmen terminere, og derved returnere et af de to mulige udfald, FALSE/TRUE.
 
 \newpage
 
