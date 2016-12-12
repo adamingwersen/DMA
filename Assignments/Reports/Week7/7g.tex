@@ -1,0 +1,188 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{program}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{float}
+
+\newcommand{\BackgroundPic}{\put(-4,0){\parbox[b][\paperheight]{\paperwidth}{\centering\includegraphics[width=\paperwidth,height=\paperheight]{nat-farve.pdf}}}}
+
+\algnewcommand\True{\textbf{true}\space}
+\algnewcommand\False{\textbf{false}\space}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\begin{document} 
+	\AddToShipoutPicture*{\BackgroundPic}
+	
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\vspace*{5cm}
+		\begin{center}
+			\Huge \textbf{Diskret Matematik og Algoritmer} \\
+			\LARGE \textbf{Aflevering 7g} \\
+		\end{center}
+		\vspace*{3.5cm}
+		\begin{flushleft}
+			
+		\begin{table}[h!]
+			\begin{tabular}{lll}
+				Adam Ingwersen,& \\ Aske Fjellerup,&\\ Peter Friborg\\
+			\end{tabular}
+		\end{table}
+			
+			
+			\vspace{3mm}
+			\vspace{3mm}
+			Datalogisk  Institut\\
+			Københavns Universitet\\
+			\vspace{3mm}
+			\today\\
+			%\vspace*{0.5cm}
+			
+		\end{flushleft}
+	\end{titlepage}
+
+	\title{7g}
+	\author{AAP}
+	
+	\newpage
+
+\newpage
+
+\section{}
+Det skal i denne delopgave vises hvordan man kan implementere træstruk-\\turerede disjunkte mængder, ved hjælp af en tabel. 
+\subsection{}
+Der opskrives pseudokode til de 3 funktioner: 
+\begin{itemize}
+    \item \textbf{Find(x)} - Denne funktion skal finde repræsentanten for den mængde, x befinder sig i.
+    \item \textbf{Init(n)} - Denne funktion skal oprette en tabel med n elementer, der hver består af en mængde indeholdende sig selv alene
+    \item \textbf{Union(x, z)} - Denne funktion skal sammenlægge mængderne x og z til en samlet mængde.
+\end{itemize}
+Først opskrives pseudokoden for \textbf{Find(x)}. Denne opbygges rekursivt: 
+
+\begin{algorithm}[H]
+\caption{Find(x) - Finder repræsentanten for den mængde x er i.}
+\begin{algorithmic}[2]
+\Function {Find}{x}
+\State \parbox[t]{.7\linewidth}{if $x \neq x.p$}
+\Indent
+\State \parbox[t]{.7\linewidth}{Find(x.p)}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{else Return x.p}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Den næste funktion, \textbf{Init(n)}, laves ved hjælp af en hjælpefunktion n kald til \textbf{MakeSet(x)}, der opretter en mængde med x som rod, og x.p peger tilbage på x.\\
+\textbf{MakeSet(x)} kan se ud som følger:
+\begin{verbatim}
+MakeSet(x)
+    x.p = x
+    x.rank = 0
+\end{verbatim}
+
+\begin{algorithm}[H]
+\caption{Init(n) - Opretter en tabel med n elementer.}
+\begin{algorithmic}[2]
+\Function {Init}{n}
+\State \parbox[t]{.7\linewidth}{for i=0 to n-1}
+\Indent
+\State \parbox[t]{.7\linewidth}{A[i] = MakeSet(i)}
+\EndIndent
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Den sidste funktion, \textbf{Union(x, z)}, skal kunne tage to mængder og forene dem, hvis de ikke allerede er i samme mængde. Funktionen skal tage den mindste mængde, og sætte på den større mængde. Dette gøres ikke ved hurtig forening. Derfor er der brug for en hjælpefunktion \textbf{ChangeAll(x, z, P)}.\\ \textbf{ChangeAll(x, z, P)} udskifter alle elementer \textbf{x} med \textbf{z} i tabellen P. Den kan se ud som følger:
+\begin{verbatim}
+ChangeAll(x, z, P)
+    for each element in P
+        if x == P[i]
+            P[i] = z
+\end{verbatim}
+
+\begin{algorithm}[H]
+\caption{Union(x, z) - Forener x og z til en enkelt mængde.}
+\begin{algorithmic}[2]
+\Function {Union}{x, z}
+\State \parbox[t]{.7\linewidth}{rx = Find(x)}
+\State \parbox[t]{.7\linewidth}{rz = Find(z)}
+\Indent
+\State \parbox[t]{.7\linewidth}{if $rx.rank >  rz.rank$}
+\Indent
+\State \parbox[t]{.7\linewidth}{ChangeAll(rz, rx, A)}
+\EndIndent
+\State \parbox[t]{.7\linewidth}{else ChangeAll(rx, rz, A)}
+\Indent
+\State \parbox[t]{.7\linewidth}{if rx.rank == rz.rank}
+\Indent
+\State \parbox[t]{.7\linewidth}{rz.rank = rz.rank + 1}
+\EndIndent
+\EndIndent
+\EndIndent
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+Det noteres at \textbf{ChangeAll(x, z, P)} kører igennem hele P ved hvert kald. Dog bliver \textbf{Find(x)} hurtigere, og tabellen, A, bliver nemmere at se på. Alle tal på tabellen i samme mængde vil pege på samme repræsentant.
+
+\subsection{}
+Det skal nu afprøves, hvordan forskellig operationer vil efterlade tabellen A:
+
+\begin{equation*}
+\begin{split}
+    \textnormal{Init(7)} &= A[0, 1, 2, 3, 4, 5, 6]\\
+    \textnormal{Union(3, 4)} &= A[0, 1, 2, 3, 3, 5, 6]\\
+    \textnormal{Union(5, 0)} &= A[0, 1, 2, 3, 3, 0, 6]\\
+    \textnormal{Union(4, 5)} &= A[0, 1, 2, 0, 0, 0, 6]\\
+    \textnormal{Union(4, 3)} &= A[0, 1, 2, 0, 0, 0, 6]\\
+    \textnormal{Union(0, 1)} &= A[0, 0, 2, 0, 0, 0, 6]\\
+    \textnormal{Union(0, 4)} &= A[0, 0, 2, 0, 0, 0, 6]\\
+    \textnormal{Union(6, 0)} &= A[0, 0, 2, 0, 0, 0, 0]\\
+\end{split}    
+\end{equation*}
+Med denne metode er det tydeligt at se hvilke mængder, der har samme repræsentant.
+\subsection{}
+Den væsentlige forskel mellem \textbf{Union(x, z)} der gennemgås i denne opgave og den \textbf{Union(i, j)} der gennemgås i noterne, er måden hvorved repræsentanten udskiftes. I noterne er det kun en enkelt peger, der skal skiftes ud, hvorimod her i opgaven skiftes alle pegere ud i hele tabellen. Metoden, hvor alle pegere bliver skiftet ud på, sker ved at kigge hele tabellen igennem, dette er tidskrævende, derimod er \textbf{Find(x)} hurtigere. Tabellen bliver lettere at se på, da alle tallene er roden i et træ. Dette gør det lettere at se, hvor mange elementer der er i hver enkelt mængde, samt at se hvor mange forskellige mængder der er.
+
+\newpage
+\section{}
+Det skal i denne opgave vises, at højden for et træ, der er forekommet ved \textbf{UNION} med \texttt{union by rank} heuristikken, højest kan være logaritmen af antallet af knuder i træet. 
+\subsection{}
+I \texttt{union by rank} heuristikken gælder det, at der for hver node vedligeholdes en rank - denne starter ved for alle noder. I det tilfælde, hvor vi betragter \texttt{union by rank} uden \texttt{path-compression}, vil enhver \textbf{UNION} følge logikken fremført i \textbf{Link(x,y)}, CLRS s. 571. Det følger direkte af \textbf{Link}-funktionen, at rank af et vilkårligt træ \texttt{t} som er resultatet af \textbf{UNION} af 2 andre vilkårlige træer, \texttt{t} og \texttt{t} højest kan være steget med 1 og mindst må være lig rank for det af de to træer med højest rank.
+\\
+
+
+\subsection{}
+\subsection{}
+
+\begin{itemize}
+    \item \textbf{Første markeing} : viser P(1) er sand\\
+
+
+For at P(1) er sand må der gælde at $rank(t)\leq lg(1)$. Da der kun er et element i træet (roden) har kan Udtrykket omskrives til $0\leq lg(1)=0$. vi kan derfor se at P(1) er sand\\
+
+    
+\end{itemize}
+ Overstående opgave at hvis $rank(t_1)\neq rank(t_2)$ gælder $rank(t) \leq max(rank(t_1),rank(t_2))$. det bruger vi som udgangspunkt til at lave induktion. \\
+ rank(t) kan ikke være støre end 2-tals logaritmen til t da det er et binært træ. Det skyldes at lg af de j elementer i træet giver en længde tilsvarende til højden af træet.
+ $$rank(t) \leq max(rank(t_1),rank(t_2))\leq max(lg(i),lg(l))$$
+ Da lg(i+j) altid vil være mere end hver for så længe de begge er positive 
+ $$rank(t) \leq max(lg(i),lg(l)) \leq lg(i+j) = lg(n)$$ 
+ her får vi logaritmen af log(n)
+
+
+\subsection{}
+
+
+\end{document}
