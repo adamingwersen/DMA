@@ -93,7 +93,7 @@ Her er sandsynlighedsfunktionen $p(n)$ monotont aftagende.
 \newpage
 
 \subsection{}
-Givet at fakultets-funktionen, under normale omstændigheder, er en integer-funktion - vil det her ikke forsøges at identificere decimal-værdien, hvor $y = 0.5$, men her angives et heltal i stedet. Den største værdi for \texttt{n}, hvortil sandsynligheden for ingen kollision er over \texttt{0.5} er \texttt{26}.
+Givet at fakultets-funktionen, under normale omstændigheder, er en integer-funktion - vil det her ikke forsøges at identificere decimal-værdien, hvor $y = 0.5$, men her angives et heltal i stedet. Den første værdi for \texttt{n}, hvortil sandsynligheden for ingen kollision er under \texttt{0.5} er \texttt{27}.
 
 Sandsynlighedsfunktionen samt en effektivisering af permutations-funktionen er angivet i R-kode i bilag sammen med kode, der genererer et plot. 
 
@@ -108,36 +108,36 @@ Sandsynlighedsfunktionen samt en effektivisering af permutations-funktionen er a
 \subsubsection*{Refleksivitet}
 R er refleksiv, da:
 $$
-xRx \forall x
+xRx \forall x \in \mathbb{R}
 $$
 
 \subsubsection*{Symmetri}
 R er symmetrisk, da hvis det gælder, at $x-y \in \mathbb{Z}$, vil det ligeldes gøre sig gældende, at $y-x \in \mathbb{Z}$
 \subsubsection*{Transitivitet}
-R er ikke transitiv, eftersom, hvis det gælder at:
+Antag, at $xRy \in \mathbb{Z}$ og $yRz \in \mathbb{Z}$, da lades:
 $$
-1.5 - 0.5 \in \mathbb{Z}
+x - y = k_{1} \in \mathbb{Z}
 $$
-..og
 $$
-1.33 - 0.33 \in \mathbb{Z}
+y - z = k_{2} \in \mathbb{Z}
 $$
-.. gælder det \textbf{ikke}, at:
+Da må:
 $$
-1.5 - 0.33 \in \mathbb{Z}
+k_{1} + k_{2} = x - y + y - z = x - z \in \mathbb{Z}
 $$
+Altså, er R en Transitiv relation.
 
 \subsection{}
 \subsubsection*{Refleksivitet}
-S er refleksiv, da:
+S er ikke refleksiv i de tilfælde, hvor $x = 0$ altså:
 $$
-xSx \forall x
+xRx \ngtr 0 \forall x = 0
 $$
 
 \subsubsection*{Symmetri}
 S er symmetrisk, da multiplikationsrelationen i sig selv er symmetrisk - enhver relation, S, hvor $x\cdot y > 0$, vil det ligeledes gælde, at $y\cdot x > 0$.
 \subsubsection*{Transitivitet}
-S er transitiv, da der ved multiplikation aldrig vil opstå en situation, hvor relationen ikke er opfyldt i $x\cdot z$, hvis og kun hvis relationen er overholdt for $x\cdot y$ samt $y\cdot z$.
+S er transitiv, da der ved multiplikation aldrig vil opstå en situation, hvor relationen ikke er opfyldt i $x\cdot z$, hvis og kun hvis relationen er overholdt for $x\cdot y$ samt $y\cdot z$. For at $x\cdot y > 0$, da må $x$ og $y$ have samme fortegn. Det samme gælder for $y \cdot z$, hvorved det må gælde, at $x$ og $z$ begge har samme fortegn. Så må $xRz > 0$, hvis $xRy \wedge yRz > 0$. 
 
 \newpage
 

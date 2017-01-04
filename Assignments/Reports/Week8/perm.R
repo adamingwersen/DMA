@@ -37,8 +37,8 @@ lapply(pkgs, require, character.only = TRUE)
 plot <- ggplot(data = probs_n, aes(x = n, y = probs))
 plot <- plot + geom_point() + theme_gdocs() + 
   geom_hline(yintercept = 0.5, color = 'red') +
-  geom_vline(xintercept = 26, color = 'red') +
-  annotate('text', x = 26, y = 0.5, parse = TRUE, label = "26")
+  geom_vline(xintercept = 27, color = 'red') +
+  annotate('text', x = 27, y = 0.5, parse = TRUE, label = "27") +
   labs(x = "n", y = "p(n)", 
        title = "Ssh. for ingen kollision som fkt. af n") +
   theme(plot.title = element_text(hjust = 0.5))
